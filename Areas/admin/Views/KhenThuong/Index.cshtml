@@ -1,0 +1,75 @@
+﻿@model IEnumerable<QuanLyNhanSu.Models.KhenThuong>
+
+@{
+    ViewBag.Title = "Danh sách khen thưởng";
+    ViewBag.active = "KhenThuong";
+}
+
+
+<div class="">
+    <div class="">
+        <h1 class="page-header">
+            <img src="~/Content/images/KhenThuongHeader.png" width="50" height="50" />
+            Khen thưởng nhân viên
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("index","Admin")">Tổng quan</a>
+            </li>
+            <li>
+                <i class="fa fa-money"></i> Khen thưởng
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div style="margin:10px">
+
+    <a class="btn btn-primary" href="@Url.Action("khen", "KhenThuong")" @Html.Raw(ViewBag.active == "KhenThuong" ? "class = 'active'" : "")>Khen Thưởng</a>
+</div>
+
+<table id="table-taikhoan" class="table table-responsive table-bordered table-striped">
+    <thead>
+        <tr class="success">
+            <th>
+                Mã nhân viên
+            </th>
+            <th>
+                Tên nhân viên
+            </th>
+            <th>
+                Tháng thưởng
+            </th>
+            <th>
+                Tiền thưởng
+            </th>
+            <th>
+                Lý do
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhanVien.MaNhanVien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhanVien.HoTen)
+                </td>
+                <td>
+                    @String.Format("{0:dd/MM/yyyy}", @item.ThangThuong)
+                </td>
+                <td>
+                    @string.Format("{0:#,#}", @item.TienThuong).Replace(",", ",")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LyDo)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
